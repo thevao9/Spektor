@@ -6,128 +6,186 @@
 <title>Family</title>
 <!-- ПОКА САЙТ НЕ ГОТОВ: закрыт от поисковиков. Когда решите сделать его публичным — удалите следующую строку. -->
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#04050a">
+<meta name="theme-color" content="#05050c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600&family=Manrope:wght@300;400;600&family=Unbounded:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#04050a;--fg:#e9edf5;--mut:#8d97ab;--amb:#ffb35c;--amb2:#ff7a1a;--cy:#7fd4ff;--line:rgba(255,255,255,.1);--glass:rgba(255,255,255,.04)}
+:root{
+  --a-rgb:139,92,246; --b-rgb:255,138,61; --c-rgb:59,130,246;   /* меняются скриптом: фиолетовый / оранжевый / синий */
+  --a:rgb(var(--a-rgb)); --b:rgb(var(--b-rgb)); --c:rgb(var(--c-rgb));
+  --bg:#05050c; --fg:#ecedf7; --mut:#9096ad; --line:rgba(255,255,255,.1); --glass:rgba(255,255,255,.045);
+}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
 body{background:var(--bg);color:var(--fg);font-family:'Manrope','Heebo',system-ui,sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+   radial-gradient(60% 45% at 12% 8%,rgba(var(--a-rgb),.24),transparent 70%),
+   radial-gradient(50% 40% at 92% 28%,rgba(var(--b-rgb),.15),transparent 70%),
+   radial-gradient(70% 50% at 50% 105%,rgba(var(--c-rgb),.22),transparent 70%)}
 h1,h2,h3{font-family:'Unbounded','Heebo',sans-serif;font-weight:400;line-height:1.15}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 a{color:inherit}
 #stars{position:fixed;inset:0;z-index:-1;pointer-events:none}
 .wrap{max-width:1100px;margin-inline:auto;padding-inline:22px}
+.grad{background:linear-gradient(90deg,var(--a),var(--b),var(--c));-webkit-background-clip:text;background-clip:text;color:transparent}
 
 /* header */
-header{position:fixed;inset:0 0 auto 0;z-index:50;backdrop-filter:blur(14px);background:linear-gradient(#04050acc,#04050a00)}
-.hbar{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
-.logo{display:flex;align-items:center;gap:10px;font-family:'Unbounded','Heebo',sans-serif;font-size:14px;text-decoration:none;letter-spacing:.04em}
-.logo i{width:20px;height:20px;border-radius:50%;background:#000;box-shadow:0 0 0 2px var(--amb),0 0 14px var(--amb2)}
-nav{display:flex;gap:22px;font-size:13px;color:var(--mut)}
+header{position:fixed;inset:0 0 auto 0;z-index:50;backdrop-filter:blur(16px);background:linear-gradient(#05050cd9,#05050c00)}
+.hbar{display:flex;align-items:center;justify-content:space-between;gap:14px;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Unbounded','Heebo',sans-serif;font-size:13px;text-decoration:none;letter-spacing:.04em;white-space:nowrap}
+.logo i{width:20px;height:20px;border-radius:50%;background:#000;box-shadow:0 0 0 2px var(--b),0 0 14px var(--b),0 0 24px var(--a)}
+nav{display:flex;gap:20px;font-size:13px;color:var(--mut)}
 nav a{text-decoration:none;transition:color .2s}nav a:hover{color:var(--fg)}
+.tools{display:flex;gap:12px;align-items:center}
+.th{display:flex;gap:7px}
+.th button{width:18px;height:18px;border-radius:50%;border:2px solid transparent;outline:1px solid var(--line);transition:transform .2s}
+.th button:hover{transform:scale(1.2)}.th button.on{border-color:#fff}
 .langs{display:flex;gap:4px}
 .langs button{font-size:12px;padding:5px 9px;border-radius:99px;border:1px solid var(--line);color:var(--mut);transition:.2s}
-.langs button.on,.langs button:hover{color:#000;background:var(--amb);border-color:var(--amb)}
+.langs button.on,.langs button:hover{color:#fff;background:var(--a);border-color:var(--a)}
 .burger{display:none;width:36px;height:36px;font-size:20px}
-@media(max-width:860px){
+@media(max-width:980px){
   .burger{display:block}
-  nav{position:absolute;inset:64px 0 auto 0;flex-direction:column;gap:0;background:#04050af2;padding:8px 22px 18px;display:none;border-bottom:1px solid var(--line)}
+  nav{position:absolute;inset:64px 0 auto 0;flex-direction:column;gap:0;background:#05050cf5;padding:8px 22px 18px;display:none;border-bottom:1px solid var(--line)}
   nav.open{display:flex}nav a{padding:12px 0;font-size:15px}
 }
+@media(max-width:600px){.logo span{display:none}}
 
 /* hero */
 .hero{min-height:100svh;display:grid;place-items:center;text-align:center;position:relative;overflow:hidden;padding:110px 22px 70px}
 .bh{position:absolute;top:50%;left:50%;width:min(120vw,780px);aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none}
 .bh>*{position:absolute;border-radius:50%}
-.halo{inset:17%;background:radial-gradient(circle,transparent 56%,#ffcf8a 60%,#ff8a2a 64%,rgba(255,110,20,.25) 72%,transparent 80%);filter:blur(3px)}
-.core{inset:31%;background:#000;box-shadow:0 0 50px 8px rgba(255,150,50,.35),inset 0 0 40px #000}
-.disk{inset:2%;background:conic-gradient(from 0deg,#fff1d6,#ffb35c,#d65a0a,#5a1f00,#d65a0a,#ffb35c,#fff1d6);
+.halo{inset:17%;background:radial-gradient(circle,transparent 56%,#fff 59%,var(--b) 62%,rgba(var(--a-rgb),.4) 72%,transparent 80%);filter:blur(3px)}
+.core{inset:31%;background:#000;box-shadow:0 0 60px 10px rgba(var(--a-rgb),.4),0 0 120px 20px rgba(var(--b-rgb),.18),inset 0 0 40px #000}
+.disk{inset:2%;background:conic-gradient(from 0deg,#fff,var(--b),var(--a),var(--c),var(--a),var(--b),#fff);
   -webkit-mask:radial-gradient(circle,transparent 30%,#000 34%,#000 58%,transparent 70%);mask:radial-gradient(circle,transparent 30%,#000 34%,#000 58%,transparent 70%);
-  filter:blur(1.4px) saturate(1.15);transform:rotateX(76deg);animation:spin 26s linear infinite}
-.disk2{inset:2%;background:conic-gradient(from 90deg,transparent,rgba(127,212,255,.5),transparent 40%);
+  transform:rotateX(76deg);animation:spin 26s linear infinite;will-change:transform}
+.disk2{inset:2%;background:conic-gradient(from 90deg,transparent,rgba(var(--c-rgb),.65),transparent 40%);
   -webkit-mask:radial-gradient(circle,transparent 40%,#000 44%,#000 52%,transparent 58%);mask:radial-gradient(circle,transparent 40%,#000 44%,#000 52%,transparent 58%);
-  transform:rotateX(76deg);animation:spin 14s linear infinite reverse;mix-blend-mode:screen}
+  transform:rotateX(76deg);animation:spin 14s linear infinite reverse;mix-blend-mode:screen;will-change:transform}
 @keyframes spin{to{transform:rotateX(76deg) rotateZ(360deg)}}
-.hero-in{position:relative;z-index:2;max-width:880px}
-.kick{font-size:12px;letter-spacing:.35em;text-transform:uppercase;color:var(--amb);margin-bottom:22px}
-.hero h1{font-size:clamp(40px,9vw,92px);font-weight:600;letter-spacing:-.01em;text-shadow:0 0 40px #000,0 0 80px #000}
-.hero p{margin:22px auto 34px;color:#c3cadb;font-size:clamp(16px,2.2vw,20px);text-shadow:0 0 20px #000}
-.btn{display:inline-block;padding:14px 30px;border-radius:99px;background:linear-gradient(135deg,var(--amb),var(--amb2));color:#1a0b00;font-weight:600;text-decoration:none;font-size:14px;transition:transform .2s,box-shadow .2s;box-shadow:0 0 0 rgba(255,150,50,0)}
-.btn:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(255,150,50,.4)}
+.hero-in{position:relative;z-index:2;max-width:900px}
+.kick{display:inline-block;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#fff;margin-bottom:24px;padding:8px 18px;border-radius:99px;border:1px solid var(--line);background:rgba(255,255,255,.05);backdrop-filter:blur(8px)}
+.hero h1{font-size:clamp(34px,8vw,84px);font-weight:600;letter-spacing:-.01em;filter:drop-shadow(0 0 28px rgba(0,0,0,.9))}
+.hero p{margin:22px auto 34px;color:#d3d6e6;font-size:clamp(16px,2.2vw,20px);text-shadow:0 0 20px #000}
+.btn{display:inline-block;padding:14px 30px;border-radius:99px;background:linear-gradient(135deg,var(--a),var(--b));color:#fff;font-weight:600;text-decoration:none;font-size:14px;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(var(--a-rgb),.5)}
+.btn.ghost{background:transparent;border:1px solid var(--line);font-weight:400}
+.btn.ghost:hover{border-color:rgba(var(--a-rgb),.7);box-shadow:none}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:64px}
 .stat{padding:16px 8px;border-top:1px solid var(--line)}
-.stat b{display:block;font-family:'Unbounded','Heebo',sans-serif;font-weight:300;font-size:clamp(26px,5vw,44px);color:var(--amb)}
+.stat b{display:block;font-family:'Unbounded','Heebo',sans-serif;font-weight:300;font-size:clamp(26px,5vw,44px)}
 .stat span{font-size:12px;color:var(--mut)}
 @media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}}
 
 /* sections */
-section{padding-block:100px;position:relative}
-.sec-h{margin-bottom:46px}
-.sec-h small{display:block;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--cy);margin-bottom:12px}
+section{padding-block:96px;position:relative}
+.sec-h{margin-bottom:44px}
+.sec-h small{display:block;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--c);margin-bottom:12px}
 .sec-h h2{font-size:clamp(28px,5vw,48px)}
+.lead{max-width:760px;font-size:clamp(17px,2.2vw,21px);color:#d0d3e4}
 .glass{background:var(--glass);border:1px solid var(--line);border-radius:20px;backdrop-filter:blur(8px)}
-.story p{max-width:720px;font-size:clamp(17px,2.2vw,21px);color:#cfd5e3}
 .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s ease}
 .rv.in{opacity:1;transform:none}
+/* спокойные разделы про память: без градиентов и ярких акцентов */
+.quiet{background:rgba(255,255,255,.02);border-block:1px solid var(--line)}
+.quiet .sec-h small{color:var(--mut)}
+.quiet .btn{background:rgba(255,255,255,.08);border:1px solid var(--line);font-weight:400}
+.quiet .btn:hover{box-shadow:none;border-color:rgba(255,255,255,.4)}
+
+/* stories */
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.story{padding:26px}
+.story i{font-style:normal;font-family:'Unbounded','Heebo',sans-serif;font-size:28px;font-weight:300}
+.story h3{font-size:18px;margin:10px 0 10px}
+.story p{color:#c9cce0;font-size:15px}
 
 /* timeline */
-.tl{border-inline-start:1px solid var(--line);margin-inline-start:6px;padding-inline-start:30px;display:grid;gap:36px}
+.tl{border-inline-start:1px solid var(--line);margin-inline-start:6px;padding-inline-start:30px;display:grid;gap:34px}
 .ev{position:relative}
-.ev::before{content:"";position:absolute;inset-inline-start:-37px;top:12px;width:12px;height:12px;border-radius:50%;background:var(--amb);box-shadow:0 0 0 5px rgba(255,179,92,.15),0 0 18px var(--amb2)}
-.ev b{font-family:'Unbounded','Heebo',sans-serif;font-weight:300;font-size:clamp(26px,4vw,38px);color:var(--amb)}
-.ev p{color:#c3cadb;max-width:620px}
+.ev::before{content:"";position:absolute;inset-inline-start:-37px;top:12px;width:12px;height:12px;border-radius:50%;background:var(--b);box-shadow:0 0 0 5px rgba(var(--b-rgb),.18),0 0 18px var(--a)}
+.ev b{font-family:'Unbounded','Heebo',sans-serif;font-weight:300;font-size:clamp(24px,4vw,36px)}
+.ev p{color:#cdd0e2;max-width:640px}
 
 /* tree */
 .treebox{overflow-x:auto;padding:10px 0 20px}
 .treebox svg{display:block;margin-inline:auto;min-width:720px;width:100%;height:auto}
 .treehint{color:var(--mut);font-size:13px;margin-bottom:14px}
-.edge{fill:none;stroke:url(#eg);stroke-width:1.3;opacity:.55}
-.sp{stroke:var(--cy);stroke-width:1;stroke-dasharray:3 5;opacity:.6}
+.edge{fill:none;stroke:url(#eg);stroke-width:1.4;opacity:.6}
+.sp{stroke:var(--b);stroke-width:1;stroke-dasharray:3 5;opacity:.7}
 .node{cursor:pointer;outline:none}
-.node .halo2{fill:rgba(255,179,92,.12);transition:.3s;animation:tw 4s ease-in-out infinite}
-.node .dot{fill:#fff;filter:drop-shadow(0 0 6px #ffb35c)}
-.node:hover .halo2,.node:focus-visible .halo2{fill:rgba(255,179,92,.35);r:30px}
-.node .nm{fill:#e9edf5;font-size:15px;font-family:'Manrope','Heebo',sans-serif;font-weight:400}
-.node .yr{fill:#8d97ab;font-size:12px}
+.node .halo2{fill:rgba(var(--a-rgb),.2);transition:.3s;animation:tw 4s ease-in-out infinite}
+.node .dot{fill:#fff;filter:drop-shadow(0 0 6px var(--b))}
+.node:hover .halo2,.node:focus-visible .halo2{fill:rgba(var(--b-rgb),.45);r:30px}
+.node .nm{fill:#ecedf7;font-size:15px;font-family:'Manrope','Heebo',sans-serif;font-weight:400}
+.node .yr{fill:#9096ad;font-size:12px}
 @keyframes tw{50%{opacity:.45}}
+.treenote{color:var(--mut);font-size:13px;margin-top:12px}
 
-/* people + media */
+/* people */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
-.card{padding:22px;text-align:start;transition:transform .25s,border-color .25s;display:block;width:100%;text-decoration:none}
-.card:hover{transform:translateY(-4px);border-color:rgba(255,179,92,.5)}
-.av{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;margin-bottom:14px;font-family:'Unbounded','Heebo',sans-serif;font-size:22px;color:#1a0b00;background:conic-gradient(var(--amb),var(--amb2),var(--cy),var(--amb));overflow:hidden}
+.card{padding:22px;text-align:start;transition:transform .25s,border-color .25s;display:block;width:100%}
+.card:hover{transform:translateY(-4px);border-color:rgba(var(--a-rgb),.65)}
+.av{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;margin-bottom:14px;font-family:'Unbounded','Heebo',sans-serif;font-size:22px;color:#fff;background:conic-gradient(var(--a),var(--b),var(--c),var(--a));overflow:hidden}
 .av img{width:100%;height:100%;object-fit:cover}
 .card h3{font-size:16px;margin-bottom:4px}
 .card span{color:var(--mut);font-size:13px}
-.sub{font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin:40px 0 18px}
-.vid{position:relative;aspect-ratio:16/9;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#10162a,#1a0f08) center/cover;border:1px solid var(--line);display:grid;place-items:end start;padding:18px;text-align:start}
-.vid .pl{position:absolute;inset:0;margin:auto;width:62px;height:62px;border-radius:50%;background:rgba(255,179,92,.9);display:grid;place-items:center;color:#1a0b00;font-size:22px;padding-inline-start:4px}
-.vid .cap{position:relative;z-index:1;text-shadow:0 2px 12px #000}
-.vid .cap b{font-weight:600;display:block}.vid .cap small{color:#cfd5e3}
+
+/* interviews */
+.ivgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px}
+.iv{overflow:hidden}
+.vid{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,#12142a,#1c1226) center/cover;display:grid;place-items:center;cursor:pointer}
+.vid .pl{width:62px;height:62px;border-radius:50%;background:rgba(255,255,255,.88);display:grid;place-items:center;color:#111;font-size:22px;padding-inline-start:4px;transition:transform .2s}
+.vid:hover .pl{transform:scale(1.08)}
 .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.art{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:20px 22px}
-.art small{color:var(--mut)}
+.vid .hint{position:absolute;inset-block-end:12px;inset-inline:16px;font-size:12px;color:var(--mut)}
+.ivb{padding:22px 24px 26px}
+.ivb h3{font-size:19px}
+.ivb .meta{color:var(--mut);font-size:13px;margin:4px 0 14px}
+.ivb ul{padding-inline-start:18px;color:#cdd0e2;font-size:14px;margin-bottom:18px}
+.ivb li{margin-bottom:4px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row .btn{padding:10px 20px;font-size:13px}
+
+/* archive */
+.arbox{padding:30px;max-width:900px}
+.arbox p{color:#d0d3e4;margin-bottom:14px}
+.facts{font-family:'Unbounded','Heebo',sans-serif;font-weight:300;font-size:clamp(16px,2.4vw,22px);line-height:1.5;margin:6px 0 4px!important}
+.src{font-size:12px;color:var(--mut)!important}
+.arbox h3{font-size:16px;margin:22px 0 10px}
+.arbox ol{padding-inline-start:20px;color:#cdd0e2;margin-bottom:20px}
+.arbox li{margin-bottom:6px}
+
+/* names + sources */
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:start;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);font-weight:400}
+td:first-child{white-space:nowrap;font-weight:400}
+.tbl{overflow-x:auto;padding:6px 8px}
+.srcl{list-style:none;display:grid;gap:10px}
+.srcl li{padding:14px 18px;color:#cdd0e2;font-size:14px}
+.srcl a{text-decoration:underline;text-decoration-color:rgba(var(--b-rgb),.7);text-underline-offset:3px}
 
 /* contact + footer */
 .contact{text-align:center}
-.contact p{color:#c3cadb;max-width:560px;margin:0 auto 28px}
+.contact p{color:#d0d3e4;max-width:560px;margin:0 auto 28px}
+.contact .pv{color:var(--mut);font-size:13px;margin:26px auto 0}
 footer{padding:40px 22px;text-align:center;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
 
 /* modal */
-#modal{position:fixed;inset:0;z-index:100;display:none;place-items:center;background:rgba(2,3,8,.8);backdrop-filter:blur(10px);padding:18px}
+#modal{position:fixed;inset:0;z-index:100;display:none;place-items:center;background:rgba(3,3,9,.82);backdrop-filter:blur(10px);padding:18px}
 #modal.open{display:grid}
-.mbox{position:relative;width:min(560px,100%);max-height:90vh;overflow:auto;padding:34px;background:#0a0d18;border:1px solid var(--line);border-radius:24px;box-shadow:0 0 80px rgba(255,150,50,.15);animation:pop .3s ease}
+.mbox{position:relative;width:min(560px,100%);max-height:90vh;overflow:auto;padding:34px;background:#0b0b18;border:1px solid var(--line);border-radius:24px;box-shadow:0 0 90px rgba(var(--a-rgb),.25);animation:pop .3s ease}
 @keyframes pop{from{opacity:0;transform:scale(.94)}}
 .mbox h3{font-size:26px;margin-bottom:4px}
 .mx{position:absolute;inset-block-start:14px;inset-inline-end:14px;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);font-size:18px}
-.mrow{margin-top:16px;color:#c3cadb}
-.mrow small{display:block;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--cy);margin-bottom:6px}
+.mrow{margin-top:16px;color:#cdd0e2}
+.mrow small{display:block;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--c);margin-bottom:6px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{padding:6px 14px;border-radius:99px;border:1px solid var(--line);font-size:13px;transition:.2s}
-.chip:hover{border-color:var(--amb);color:var(--amb)}
+.chip:hover{border-color:var(--b);color:var(--b)}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -138,14 +196,15 @@ footer{padding:40px 22px;text-align:center;color:var(--mut);font-size:13px;borde
   <div class="wrap hbar">
     <a class="logo" href="#top"><i></i><span id="logoName"></span></a>
     <nav id="nav">
-      <a href="#story" data-i="n_story"></a>
+      <a href="#stories" data-i="n_stories"></a>
       <a href="#timeline" data-i="n_timeline"></a>
       <a href="#tree" data-i="n_tree"></a>
-      <a href="#people" data-i="n_people"></a>
-      <a href="#media" data-i="n_media"></a>
+      <a href="#interviews" data-i="n_interviews"></a>
+      <a href="#archive" data-i="n_archive"></a>
       <a href="#contact" data-i="n_contact"></a>
     </nav>
-    <div style="display:flex;gap:8px;align-items:center">
+    <div class="tools">
+      <div class="th" id="th"></div>
       <div class="langs" id="langs"></div>
       <button class="burger" id="burger" aria-label="menu">☰</button>
     </div>
@@ -157,46 +216,67 @@ footer{padding:40px 22px;text-align:center;color:var(--mut);font-size:13px;borde
     <div class="bh" aria-hidden="true"><div class="halo"></div><div class="core"></div><div class="disk"></div><div class="disk2"></div></div>
     <div class="hero-in">
       <div class="kick" data-i="kicker"></div>
-      <h1 id="heroName"></h1>
+      <h1 class="grad" id="heroName"></h1>
       <p data-i="tagline"></p>
-      <a class="btn" href="#story" data-i="cta"></a>
+      <a class="btn" href="#intro" data-i="cta"></a>
       <div class="stats" id="stats"></div>
     </div>
   </div>
 
-  <section id="story" class="story"><div class="wrap rv">
-    <div class="sec-h"><small data-i="n_story"></small><h2 data-i="story_h"></h2></div>
-    <p data-i="story_t"></p>
+  <section id="intro"><div class="wrap rv">
+    <div class="sec-h"><small>◎</small><h2 class="grad" data-i="intro_h"></h2></div>
+    <p class="lead" data-i="intro_t"></p>
+  </div></section>
+
+  <section id="stories"><div class="wrap">
+    <div class="sec-h rv"><small>✦</small><h2 class="grad" data-i="n_stories"></h2></div>
+    <div class="sgrid" id="sgrid"></div>
   </div></section>
 
   <section id="timeline"><div class="wrap">
-    <div class="sec-h rv"><small>∞</small><h2 data-i="n_timeline"></h2></div>
+    <div class="sec-h rv"><small>∞</small><h2 class="grad" data-i="n_timeline"></h2></div>
     <div class="tl" id="tl"></div>
   </div></section>
 
   <section id="tree"><div class="wrap">
-    <div class="sec-h rv"><small>✦</small><h2 data-i="tree_h"></h2></div>
+    <div class="sec-h rv"><small>✧</small><h2 class="grad" data-i="tree_h"></h2></div>
     <p class="treehint" data-i="tree_hint"></p>
     <div class="treebox glass rv" id="treebox"></div>
+    <p class="treenote" data-i="tree_note"></p>
   </div></section>
 
   <section id="people"><div class="wrap">
-    <div class="sec-h rv"><small>◎</small><h2 data-i="n_people"></h2></div>
+    <div class="sec-h rv"><small>◉</small><h2 class="grad" data-i="people_h"></h2></div>
     <div class="grid" id="pgrid"></div>
   </div></section>
 
-  <section id="media"><div class="wrap">
-    <div class="sec-h rv"><small>▶</small><h2 data-i="n_media"></h2></div>
-    <div class="sub" data-i="videos"></div>
-    <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))" id="vgrid"></div>
-    <div class="sub" data-i="articles"></div>
-    <div style="display:grid;gap:12px" id="agrid"></div>
+  <section id="interviews" class="quiet"><div class="wrap">
+    <div class="sec-h rv"><small>▶</small><h2 data-i="iv_h"></h2></div>
+    <p class="lead rv" style="margin-bottom:34px" data-i="iv_t"></p>
+    <div class="ivgrid" id="ivgrid"></div>
+  </div></section>
+
+  <section id="archive" class="quiet" style="border-top:0"><div class="wrap">
+    <div class="sec-h rv"><small>❖</small><h2 data-i="ar_h"></h2></div>
+    <div class="arbox glass rv" id="arbox"></div>
+  </div></section>
+
+  <section id="names"><div class="wrap">
+    <div class="sec-h rv"><small>Aa</small><h2 class="grad" data-i="names_h"></h2></div>
+    <p class="lead rv" style="margin-bottom:26px;font-size:16px" data-i="names_t"></p>
+    <div class="tbl glass rv"><table><thead><tr><th data-i="th_person"></th><th data-i="th_variants"></th></tr></thead><tbody id="ntb"></tbody></table></div>
+  </div></section>
+
+  <section id="sources" style="padding-top:0"><div class="wrap">
+    <div class="sec-h rv"><small>§</small><h2 class="grad" data-i="src_h"></h2></div>
+    <ul class="srcl" id="srcl"></ul>
   </div></section>
 
   <section id="contact" class="contact"><div class="wrap rv">
-    <div class="sec-h"><small>✉</small><h2 data-i="contact_h"></h2></div>
+    <div class="sec-h"><small>✉</small><h2 class="grad" data-i="contact_h"></h2></div>
     <p data-i="contact_t"></p>
     <a class="btn" id="mail" data-i="contact_b"></a>
+    <p class="pv" data-i="privacy"></p>
   </div></section>
 </main>
 
@@ -209,82 +289,171 @@ footer{padding:40px 22px;text-align:center;color:var(--mut);font-size:13px;borde
    1. НАСТРОЙКИ — меняйте здесь
    ============================================================ */
 const L=(uk,ru,en,he)=>({uk,ru,en,he});
-const CONFIG={ email:"your@email.com" };
-const FAMILY=L("Прізвище","Фамилия","Surname","משפחה");   // <— название семьи на 4 языках
+const CONFIG={ email:"your@email.com" };                       // <— ваша почта для связи
+const FAMILY=L("Спектор · Барштейн","Спектор · Барштейн","Spector · Barshtein","ספקטור · ברשטיין");   // <— заголовок сайта
 
 /* ============================================================
    2. ТЕКСТЫ ИНТЕРФЕЙСА (4 языка)
    ============================================================ */
 const T={
-uk:{n_story:"Історія",n_timeline:"Хронологія",n_tree:"Сузір'я роду",n_people:"Люди",n_media:"Відео та статті",n_contact:"Написати",
-  kicker:"Сімейний архів",tagline:"Крізь час і відстані — одна родина.",cta:"Почати подорож",
-  st_gen:"поколінь",st_ppl:"людей",st_yrs:"років історії",st_sto:"історій",
-  story_h:"Наша історія",story_t:"Тут розкажіть, звідки родом ваша родина, як вона жила, що пережила і чим пишається. Кілька абзаців — і читач уже в центрі вашої історії.",
-  tree_h:"Сузір'я нашого роду",tree_hint:"Торкніться зірки, щоб познайомитися з людиною.",
-  videos:"Відео",articles:"Статті",contact_h:"Знаєте щось про нашу родину?",contact_t:"Фото, історії, виправлення — будемо вдячні за кожну деталь.",contact_b:"Написати листа",
-  born:"Народження",died:"Смерть",place:"Місце",living:"Живе",parents:"Батьки",spouse:"Чоловік / дружина",children:"Діти",close:"Закрити",
-  video_hint:"додайте ID відео",footer:"Зроблено з любов'ю до родини"},
-ru:{n_story:"История",n_timeline:"Хронология",n_tree:"Созвездие рода",n_people:"Люди",n_media:"Видео и статьи",n_contact:"Написать",
-  kicker:"Семейный архив",tagline:"Сквозь время и расстояния — одна семья.",cta:"Начать путешествие",
-  st_gen:"поколений",st_ppl:"человек",st_yrs:"лет истории",st_sto:"историй",
-  story_h:"Наша история",story_t:"Здесь расскажите, откуда родом ваша семья, как она жила, что пережила и чем гордится. Несколько абзацев — и читатель уже в центре вашей истории.",
-  tree_h:"Созвездие нашего рода",tree_hint:"Нажмите на звезду, чтобы познакомиться с человеком.",
-  videos:"Видео",articles:"Статьи",contact_h:"Знаете что-то о нашей семье?",contact_t:"Фото, истории, исправления — будем благодарны за каждую деталь.",contact_b:"Написать письмо",
-  born:"Рождение",died:"Смерть",place:"Место",living:"Жив(а)",parents:"Родители",spouse:"Супруг(а)",children:"Дети",close:"Закрыть",
-  video_hint:"добавьте ID видео",footer:"Сделано с любовью к семье"},
-en:{n_story:"Story",n_timeline:"Timeline",n_tree:"Constellation",n_people:"People",n_media:"Videos & articles",n_contact:"Contact",
-  kicker:"Family archive",tagline:"Across time and distance — one family.",cta:"Begin the journey",
-  st_gen:"generations",st_ppl:"people",st_yrs:"years of history",st_sto:"stories",
-  story_h:"Our story",story_t:"Tell here where your family comes from, how it lived, what it survived and what it is proud of. A few paragraphs, and the reader is already inside your story.",
-  tree_h:"The constellation of our family",tree_hint:"Tap a star to meet the person.",
-  videos:"Videos",articles:"Articles",contact_h:"Know something about our family?",contact_t:"Photos, stories, corrections — every detail is welcome.",contact_b:"Send an email",
-  born:"Born",died:"Died",place:"Place",living:"Living",parents:"Parents",spouse:"Spouse",children:"Children",close:"Close",
-  video_hint:"add the video ID",footer:"Made with love for the family"},
-he:{n_story:"סיפור",n_timeline:"ציר זמן",n_tree:"קבוצת כוכבים",n_people:"אנשים",n_media:"סרטונים ומאמרים",n_contact:"צור קשר",
-  kicker:"ארכיון משפחתי",tagline:"דרך זמן ומרחק — משפחה אחת.",cta:"להתחיל במסע",
-  st_gen:"דורות",st_ppl:"אנשים",st_yrs:"שנות היסטוריה",st_sto:"סיפורים",
-  story_h:"הסיפור שלנו",story_t:"כאן מספרים מאיפה המשפחה הגיעה, איך חיה, מה עברה ובמה היא גאה. כמה פסקאות, והקורא כבר בתוך הסיפור שלכם.",
-  tree_h:"קבוצת הכוכבים של משפחתנו",tree_hint:"הקישו על כוכב כדי להכיר את האדם.",
-  videos:"סרטונים",articles:"מאמרים",contact_h:"יודעים משהו על משפחתנו?",contact_t:"תמונות, סיפורים, תיקונים — כל פרט יתקבל בברכה.",contact_b:"שליחת מייל",
-  born:"לידה",died:"פטירה",place:"מקום",living:"בחיים",parents:"הורים",spouse:"בן/בת זוג",children:"ילדים",close:"סגירה",
-  video_hint:"הוסיפו מזהה סרטון",footer:"נעשה באהבה למשפחה"}
+uk:{n_stories:"Історії",n_timeline:"Хронологія",n_tree:"Сузір'я роду",n_interviews:"Інтерв'ю",n_archive:"Архів Шоа",n_contact:"Написати",
+  kicker:"Сімейний архів · Лучинець — Шаргород",tagline:"Крізь час і відстані — одна родина.",cta:"Почати подорож",
+  st_gen:"покоління",st_ppl:"людей у сузір'ї",st_yrs:"років історії",st_sto:"історій та інтерв'ю",
+  intro_h:"Звідки ми",intro_t:"Це сайт про родини Спектор, Барштейн і Боднар із подільських містечок Лучинець і Шаргород та про їхніх нащадків. Тут зібрані історії, документи й відеосвідчення тих, хто пройшов через окупацію, гетто та повоєнний голод і зберіг рід. Сайт будується поступово: якщо знаєте більше, напишіть.",
+  tree_h:"Сузір'я нашого роду",tree_hint:"Торкніться зірки, щоб познайомитися з людиною.",tree_note:"Живих родичів тут навмисно не показано.",
+  people_h:"Люди",iv_h:"Відеоінтерв'ю",iv_t:"Двоє братів Барштейнів розповіли свою історію для архіву Фонду Шоа. Це їхній власний голос про Лучинець, гетто й повернення до життя.",
+  iv_watch:"Дивитися",iv_card:"Картка в архіві",iv_hint:"додайте посилання на відео",
+  ar_h:"Архів Фонду Шоа",ar_t1:"Обидва інтерв'ю зберігаються у Візуальному архіві історії (Visual History Archive) інституту USC Shoah Foundation. Фонд, заснований Стівеном Спілбергом, записує свідчення тих, хто пережив Голокост.",
+  ar_facts:"Станом на листопад 2026 року в архіві {n} відеосвідчень {l} мовами з {c} країн.",
+  ar_how_h:"Як знайти записи",ar_how:["Відкрийте vha.usc.edu і введіть ім'я, прізвище або місто (наприклад, Лучинець).","Скористайтеся індексом JewishGen: там є картки з архівними кодами.","Повний перегляд доступний у партнерських установах (їх понад 200 у світі); умови залежать від закладу."],
+  ar_src:"Дані з сайту USC Shoah Foundation, листопад 2026.",
+  names_h:"Імена й варіанти написання",names_t:"У документах і спогадах одна людина часто має кілька імен. Це допоможе знайти нас в архівах.",th_person:"Людина",th_variants:"Варіанти",
+  src_h:"Джерела",contact_h:"Знаєте щось про нашу родину?",contact_t:"Фото, історії, виправлення: будемо вдячні за кожну деталь.",contact_b:"Написати листа",
+  privacy:"Сайт у роботі: дерево може містити неточності. Якщо знайшли себе чи рідних і хочете щось змінити або прибрати, напишіть.",
+  born:"Народження",died:"Смерть",place:"Місце",parents:"Батьки",spouse:"Чоловік / дружина",children:"Діти",close:"Закрити",
+  th_auto:"Авто",th_pur:"Фіолетовий",th_ora:"Помаранчевий",th_blu:"Синій",footer:"Зроблено з любов'ю до родини"},
+ru:{n_stories:"Истории",n_timeline:"Хронология",n_tree:"Созвездие рода",n_interviews:"Интервью",n_archive:"Архив Шоа",n_contact:"Написать",
+  kicker:"Семейный архив · Лучинец — Шаргород",tagline:"Сквозь время и расстояния — одна семья.",cta:"Начать путешествие",
+  st_gen:"поколения",st_ppl:"человек в созвездии",st_yrs:"лет истории",st_sto:"историй и интервью",
+  intro_h:"Откуда мы",intro_t:"Это сайт о семьях Спектор, Барштейн и Боднар из подольских местечек Лучинец и Шаргород и об их потомках. Здесь собраны истории, документы и видеосвидетельства тех, кто пережил оккупацию, гетто и послевоенный голод и сохранил род. Сайт строится постепенно: если знаете больше, напишите.",
+  tree_h:"Созвездие нашего рода",tree_hint:"Нажмите на звезду, чтобы познакомиться с человеком.",tree_note:"Живых родственников здесь намеренно не показано.",
+  people_h:"Люди",iv_h:"Видеоинтервью",iv_t:"Двое братьев Барштейнов рассказали свою историю для архива Фонда Шоа. Это их собственный голос о Лучинце, гетто и возвращении к жизни.",
+  iv_watch:"Смотреть",iv_card:"Карточка в архиве",iv_hint:"добавьте ссылку на видео",
+  ar_h:"Архив Фонда Шоа",ar_t1:"Оба интервью хранятся в Визуальном архиве истории (Visual History Archive) института USC Shoah Foundation. Фонд, основанный Стивеном Спилбергом, записывает свидетельства переживших Холокост.",
+  ar_facts:"По состоянию на ноябрь 2026 года в архиве {n} видеосвидетельств на {l} языках из {c} стран.",
+  ar_how_h:"Как найти записи",ar_how:["Откройте vha.usc.edu и введите имя, фамилию или город (например, Лучинец).","Воспользуйтесь индексом JewishGen: там есть карточки с архивными кодами.","Полный просмотр доступен в партнёрских учреждениях (их более 200 в мире); условия зависят от учреждения."],
+  ar_src:"Данные с сайта USC Shoah Foundation, ноябрь 2026.",
+  names_h:"Имена и варианты написания",names_t:"В документах и воспоминаниях у одного человека часто несколько имён. Это поможет найти нас в архивах.",th_person:"Человек",th_variants:"Варианты",
+  src_h:"Источники",contact_h:"Знаете что-то о нашей семье?",contact_t:"Фото, истории, исправления: будем благодарны за каждую деталь.",contact_b:"Написать письмо",
+  privacy:"Сайт в работе: дерево может содержать неточности. Если нашли здесь себя или родных и хотите что-то изменить или убрать, напишите.",
+  born:"Рождение",died:"Смерть",place:"Место",parents:"Родители",spouse:"Супруг(а)",children:"Дети",close:"Закрыть",
+  th_auto:"Авто",th_pur:"Фиолетовый",th_ora:"Оранжевый",th_blu:"Синий",footer:"Сделано с любовью к семье"},
+en:{n_stories:"Stories",n_timeline:"Timeline",n_tree:"Constellation",n_interviews:"Interviews",n_archive:"Shoah archive",n_contact:"Contact",
+  kicker:"Family archive · Luchinets — Sharhorod",tagline:"Across time and distance — one family.",cta:"Begin the journey",
+  st_gen:"generations",st_ppl:"people in the constellation",st_yrs:"years of history",st_sto:"stories & interviews",
+  intro_h:"Where we come from",intro_t:"This site is about the Spector, Barshtein and Bodnar families from the Podolian towns of Luchinets and Sharhorod, and their descendants. It gathers stories, documents and video testimonies of people who lived through occupation, the ghetto and the postwar famine, and kept the family going. The site grows step by step: if you know more, write to us.",
+  tree_h:"The constellation of our family",tree_hint:"Tap a star to meet the person.",tree_note:"Living relatives are deliberately not shown here.",
+  people_h:"People",iv_h:"Video interviews",iv_t:"Two Barshtein brothers told their story for the Shoah Foundation archive: their own voices on Luchinets, the ghetto and returning to life.",
+  iv_watch:"Watch",iv_card:"Archive record",iv_hint:"add the video link",
+  ar_h:"The Shoah Foundation archive",ar_t1:"Both interviews are held in the Visual History Archive of the USC Shoah Foundation. The Foundation, established by Steven Spielberg, records the testimonies of Holocaust survivors.",
+  ar_facts:"As of November 2026 the archive holds {n} video testimonies in {l} languages from {c} countries.",
+  ar_how_h:"How to find recordings",ar_how:["Open vha.usc.edu and search by name, surname or town (for example, Luchinets).","Use the JewishGen index: it has record cards with archive codes.","Full viewing is available at partner institutions (over 200 worldwide); terms depend on the institution."],
+  ar_src:"Figures from the USC Shoah Foundation website, November 2026.",
+  names_h:"Names and spelling variants",names_t:"In documents and memories one person often has several names. This helps others find us in the archives.",th_person:"Person",th_variants:"Variants",
+  src_h:"Sources",contact_h:"Know something about our family?",contact_t:"Photos, stories, corrections: every detail is welcome.",contact_b:"Send an email",
+  privacy:"Work in progress: the tree may contain inaccuracies. If you found yourself or relatives here and want something changed or removed, write to us.",
+  born:"Born",died:"Died",place:"Place",parents:"Parents",spouse:"Spouse",children:"Children",close:"Close",
+  th_auto:"Auto",th_pur:"Purple",th_ora:"Orange",th_blu:"Blue",footer:"Made with love for the family"},
+he:{n_stories:"סיפורים",n_timeline:"ציר זמן",n_tree:"קבוצת כוכבים",n_interviews:"ראיונות",n_archive:"ארכיון השואה",n_contact:"צור קשר",
+  kicker:"ארכיון משפחתי · לוצ'ינץ — שרגרוד",tagline:"דרך זמן ומרחק — משפחה אחת.",cta:"להתחיל במסע",
+  st_gen:"דורות",st_ppl:"אנשים בקבוצת הכוכבים",st_yrs:"שנות היסטוריה",st_sto:"סיפורים וראיונות",
+  intro_h:"מאיפה באנו",intro_t:"אתר זה עוסק במשפחות ספקטור, ברשטיין ובודנר מעיירות פודוליה לוצ'ינץ ושרגרוד, ובצאצאיהן. כאן נאספים סיפורים, מסמכים ועדויות וידאו של מי שעברו כיבוש, גטו ורעב שאחרי המלחמה, ושמרו על המשפחה. האתר נבנה בהדרגה: אם אתם יודעים עוד, כתבו לנו.",
+  tree_h:"קבוצת הכוכבים של משפחתנו",tree_hint:"הקישו על כוכב כדי להכיר את האדם.",tree_note:"קרובים חיים אינם מוצגים כאן בכוונה.",
+  people_h:"אנשים",iv_h:"ראיונות וידאו",iv_t:"שני האחים ברשטיין סיפרו את סיפורם עבור ארכיון קרן שואה. זהו קולם שלהם על לוצ'ינץ, הגטו והחזרה לחיים.",
+  iv_watch:"לצפייה",iv_card:"כרטיס בארכיון",iv_hint:"הוסיפו קישור לסרטון",
+  ar_h:"ארכיון קרן שואה",ar_t1:"שני הראיונות שמורים בארכיון ההיסטוריה החזותית (Visual History Archive) של מכון USC Shoah Foundation. הקרן, שהוקמה על ידי סטיבן שפילברג, מתעדת עדויות של מי ששרדו את השואה.",
+  ar_facts:"נכון לנובמבר 2026 הארכיון מכיל {n} עדויות וידאו ב-{l} שפות, מ-{c} מדינות.",
+  ar_how_h:"איך מוצאים הקלטות",ar_how:["היכנסו ל-vha.usc.edu והקלידו שם, שם משפחה או עיר (למשל לוצ'ינץ).","השתמשו באינדקס של JewishGen: יש שם כרטיסים עם קודי ארכיון.","אפשר לצפות בהקלטות באחד ממוסדות השותפים (יותר מ-200 בעולם); התנאים תלויים במוסד."],
+  ar_src:"הנתונים מאתר USC Shoah Foundation, נובמבר 2026.",
+  names_h:"שמות וצורות כתיבה",names_t:"במסמכים ובזיכרונות לאדם אחד יש לעיתים כמה שמות. זה יעזור למצוא אותנו בארכיונים.",th_person:"אדם",th_variants:"וריאנטים",
+  src_h:"מקורות",contact_h:"יודעים משהו על משפחתנו?",contact_t:"תמונות, סיפורים, תיקונים: כל פרט יתקבל בברכה.",contact_b:"שליחת מייל",
+  privacy:"האתר בעבודה: ייתכנו אי־דיוקים בעץ. אם מצאתם את עצמכם או קרובים ורוצים לשנות או להסיר, כתבו לנו.",
+  born:"לידה",died:"פטירה",place:"מקום",parents:"הורים",spouse:"בן/בת זוג",children:"ילדים",close:"סגירה",
+  th_auto:"אוטומטי",th_pur:"סגול",th_ora:"כתום",th_blu:"כחול",footer:"נעשה באהבה למשפחה"}
 };
 
 /* ============================================================
-   3. ЛЮДИ — заменяйте примеры на реальных
-   gen: номер поколения (0 — самое старшее)
-   parents: id родителей, spouse: id супруга(и)
-   living:true — скрывает даты и место (приватность!)
-   photo: "photos/ivan.jpg" (необязательно)
+   3. ЛЮДИ — только умершие и исторические. ЖИВЫХ не добавляем без их согласия.
+   gen: поколение (0 — старшее). parents: id родителей. spouse: id супруга(и).
+   Чтобы добавить человека: скопируйте строку, дайте новый id, впишите имя на 4 языках.
+   photo: "photos/имя.jpg" (необязательно).
    ============================================================ */
-const BIO=L("Тут буде розповідь про людину: де народилась, чим займалась, що любила.","Здесь будет рассказ о человеке: где родился, чем занимался, что любил.","A story about this person goes here: where they were born, what they did, what they loved.","כאן יופיע סיפור על האדם: איפה נולד, במה עסק, מה אהב.");
-const CITY=L("[місто]","[город]","[city]","[עיר]");
+const NO_BIO=L("Історія цієї людини ще збирається.","История этого человека ещё собирается.","This person's story is still being gathered.","הסיפור של אדם זה עדיין נאסף.");
+const LUCH=L("Лучинець","Лучинец","Luchinets","לוצ'ינץ"), SHAR=L("Шаргород","Шаргород","Sharhorod","שרגרוד");
 const PEOPLE=[
- {id:"p1",gen:0,name:L("Йосип","Иосиф","Joseph","יוסף"),born:1910,died:1985,place:CITY,parents:[],spouse:"p2",bio:BIO},
- {id:"p2",gen:0,name:L("Марія","Мария","Maria","מרים"),born:1914,died:1999,place:CITY,parents:[],spouse:"p1",bio:BIO},
- {id:"p3",gen:1,name:L("Давид","Давид","David","דוד"),born:1938,died:2012,place:CITY,parents:["p1","p2"],spouse:"p4",bio:BIO},
- {id:"p4",gen:1,name:L("Анна","Анна","Anna","חנה"),born:1941,died:2020,place:CITY,parents:[],spouse:"p3",bio:BIO},
- {id:"p5",gen:1,name:L("Лея","Лея","Leah","לאה"),born:1945,died:2018,place:CITY,parents:["p1","p2"],bio:BIO},
- {id:"p6",gen:2,name:L("Михайло","Михаил","Michael","מיכאל"),born:1968,living:true,parents:["p3","p4"],spouse:"p7",bio:BIO},
- {id:"p7",gen:2,name:L("Софія","София","Sophia","סופיה"),born:1972,living:true,parents:[],spouse:"p6",bio:BIO},
- {id:"p8",gen:3,name:L("Єва","Ева","Eva","חווה"),born:2000,living:true,parents:["p6","p7"],bio:BIO}
+ {id:"e1",gen:0,name:L("Євсей Спектор","Евсей Спектор","Evsei Spector","אבסיי ספקטור"),born:1871,died:1947,place:LUCH,parents:[],spouse:"e2",
+  bio:L("Народився в Лучинці. З 1930 року очолював єврейський колгосп. Помер під час повоєнного голоду 1947 року.","Родился в Лучинце. С 1930 года возглавлял еврейский колхоз. Умер во время послевоенного голода 1947 года.","Born in Luchinets. From 1930 he headed the Jewish kolkhoz. He died in the postwar famine of 1947.","נולד בלוצ'ינץ. משנת 1930 עמד בראש הקולחוז היהודי. מת ברעב שאחרי המלחמה ב-1947.")},
+ {id:"e2",gen:0,name:L("Малка Спектор","Малка Спектор","Malka Spector","מלכה ספקטור"),born:1875,died:1952,place:SHAR,parents:[],spouse:"e1",
+  bio:L("Уродженка Шаргорода, в архівних індексах згадується також як Калихман. Пережила чоловіка та голод 1947 року.","Уроженка Шаргорода, в архивных индексах упоминается также как Калихман. Пережила мужа и голод 1947 года.","Born in Sharhorod; archive indexes also list her as Kalikhman. She outlived her husband and survived the famine of 1947.","נולדה בשרגרוד; באינדקסים של הארכיון היא מופיעה גם כקליכמן. שרדה את בעלה ואת רעב 1947.")},
+ {id:"f1",gen:1,name:L("Фрейда Спектор","Фрейда Спектор","Freida Spector","פריידה ספקטור"),parents:["e1","e2"],
+  bio:L("Найстарша з п'ятьох дітей, жила в Шаргороді.","Старшая из пятерых детей, жила в Шаргороде.","The eldest of the five children, lived in Sharhorod.","הבכורה מבין חמשת הילדים, חיה בשרגרוד.")},
+ {id:"o1",gen:1,name:L("Ойвід Спектор","Ойвид Спектор","Oivid Spector","אויביד ספקטור"),parents:["e1","e2"],bio:NO_BIO},
+ {id:"a1",gen:1,name:L("Айзик Спектор","Айзик Спектор","Aizik Spector","אייזיק ספקטור"),parents:["e1","e2"],
+  bio:L("Після війни жив у Москві.","После войны жил в Москве.","Lived in Moscow after the war.","אחרי המלחמה חי במוסקבה.")},
+ {id:"fr",gen:1,name:L("Фроїм Барштейн","Фроим Барштейн","Froim Barshtein","פרוים ברשטיין"),born:1902,died:1941,place:LUCH,parents:[],spouse:"mi",
+  bio:L("Уродженець Лучинця. Червоноармієць: призваний у червні 1941 року, зник безвісти в серпні того ж року.","Уроженец Лучинца. Красноармеец: призван в июне 1941 года, пропал без вести в августе того же года.","Born in Luchinets. A Red Army soldier: drafted in June 1941, missing since August that year.","נולד בלוצ'ינץ. חייל בצבא האדום: גויס ביוני 1941 ונעלם באוגוסט אותה שנה.")},
+ {id:"mi",gen:1,name:L("Мінця Спектор-Барштейн","Минця Спектор-Барштейн","Mintsya Spector-Barshtein","מינציה ספקטור-ברשטיין"),born:"1906/07",died:1977,parents:["e1","e2"],spouse:"fr",
+  bio:L("Друга з п'ятьох дітей Спектор. Пережила гетто Лучинця, тиф і втрату чоловіка, виростила трьох синів.","Вторая из пятерых детей Спектор. Пережила лучинецкое гетто, тиф и потерю мужа, вырастила трёх сыновей.","Second of the five Spector children. She survived the Luchinets ghetto, typhus and the loss of her husband, and raised three sons.","השנייה מבין חמשת ילדי ספקטור. שרדה את גטו לוצ'ינץ, טיפוס ואובדן בעלה, וגידלה שלושה בנים.")},
+ {id:"kl",gen:1,name:L("Клара Спектор-Боднар","Клара Спектор-Боднар","Clara Spector-Bodnar","קלרה ספקטור-בודנר"),born:"1915/16",died:1971,parents:["e1","e2"],spouse:"iv",
+  bio:L("Наймолодша з п'ятьох дітей Спектор, у родині її звали Хайка. Вчителювала в Громівці, останні роки жила у Володіївцях.","Младшая из пятерых детей Спектор, в семье её звали Хайка. Преподавала в Громовке, последние годы жила в Володиевцах.","The youngest of the five Spector children, known in the family as Khaika. She taught in Gromovka and spent her last years in Volodiivtsi.","הצעירה מבין חמשת ילדי ספקטור, בבית קראו לה חיקה. לימדה בגרומובקה וחיה את שנותיה האחרונות בוולודייבצי.")},
+ {id:"iv",gen:1,name:L("Іван Боднар","Иван Боднар","Ivan Bodnar","איוון בודנר"),born:1918,parents:[],spouse:"kl",
+  bio:L("Вчитель початкової школи в Громівці, чоловік Клари. Похований у Володіївцях.","Учитель начальной школы в Громовке, муж Клары. Похоронен в Володиевцах.","A primary-school teacher in Gromovka, Clara's husband. Buried in Volodiivtsi.","מורה בבית ספר יסודי בגרומובקה, בעלה של קלרה. נקבר בוולודייבצי.")},
+ {id:"m1",gen:2,name:L("Михайло Барштейн","Михаил Барштейн","Mikhail Barshtein","מיכאל ברשטיין"),born:1927,died:2012,parents:["fr","mi"],
+  bio:L("Старший із братів. Ветеринарний лікар, жив у Молдові, 1995 року виїхав до Ізраїлю. 1998 року розповів свою історію для архіву Фонду Шоа.","Старший из братьев. Ветеринарный врач, жил в Молдавии, в 1995 году переехал в Израиль. В 1998 году рассказал свою историю для архива Фонда Шоа.","The eldest brother. A veterinarian who lived in Moldova and moved to Israel in 1995. In 1998 he told his story for the Shoah Foundation archive.","האח הבכור. וטרינר שחי במולדובה ועלה לישראל ב-1995. ב-1998 סיפר את סיפורו עבור ארכיון קרן שואה.")},
+ {id:"v1",gen:2,name:L("Володимир Барштейн","Владимир Барштейн","Vladimir Barshtein","ולדימיר ברשטיין"),born:1935,died:1998,parents:["fr","mi"],
+  bio:L("Народився 1935 року в Лучинці, гетто пережив дитиною. Жив у Молдові. 1997 року розповів свою історію для архіву Фонду Шоа.","Родился в 1935 году в Лучинце, гетто пережил ребёнком. Жил в Молдавии. В 1997 году рассказал свою историю для архива Фонда Шоа.","Born in Luchinets in 1935, he survived the ghetto as a child. He lived in Moldova. In 1997 he told his story for the Shoah Foundation archive.","נולד בלוצ'ינץ ב-1935, שרד את הגטו כילד. חי במולדובה. ב-1997 סיפר את סיפורו עבור ארכיון קרן שואה.")},
+ {id:"s1",gen:2,name:L("Семен Барштейн","Семён Барштейн","Semyon Barshtein","סמיון ברשטיין"),born:1941,died:1989,parents:["fr","mi"],
+  bio:L("Наймолодший із трьох братів, народився 1941 року.","Младший из трёх братьев, родился в 1941 году.","The youngest of the three brothers, born in 1941.","הצעיר מבין שלושת האחים, נולד ב-1941.")}
+ /* ЖИВЫЕ — добавляйте только с согласия человека (имя + роль, без дат и адресов). */
+];
+
+const STORIES=[
+ {t:L("Єврейський колгосп у Лучинці","Еврейский колхоз в Лучинце","A Jewish kolkhoz in Luchinets","קולחוז יהודי בלוצ'ינץ"),
+  x:L("З 1930 року Євсей Спектор очолював у Лучинці єврейський колгосп «Арбетерг Айншафт» («Праця об'єднання»), який об'єднував єврейські родини містечка до початку війни.","С 1930 года Евсей Спектор возглавлял в Лучинце еврейский колхоз «Арбетерг Айншафт» («Труд объединения»), объединявший еврейские семьи местечка до начала войны.","From 1930 Evsei Spector headed the Jewish kolkhoz Arbeterg Einshaft (\"Labor of Unity\") in Luchinets, which brought the town's Jewish families together until the war began.","משנת 1930 עמד אבסיי ספקטור בראש הקולחוז היהודי «ארבטרג איינשפט» («עבודת האיחוד») בלוצ'ינץ, שאיחד את המשפחות היהודיות בעיירה עד תחילת המלחמה.")},
+ {t:L("Схованка під гранітним пам'ятником","Укрытие под гранитным памятником","Hiding under a granite monument","מסתור מתחת למצבת גרניט"),
+  x:L("Під час облав в окупованому Лучинці юний Михайло Барштейн ховався на старому єврейському цвинтарі, у склепі під масивним гранітним пам'ятником Когана. Це врятувало його від відправки на примусові роботи.","Во время облав в оккупированном Лучинце юный Михаил Барштейн прятался на старом еврейском кладбище, в склепе под массивным гранитным памятником Когана. Это спасло его от отправки на принудительные работы.","During the roundups in occupied Luchinets, young Mikhail Barshtein hid in the old Jewish cemetery, in a vault beneath the massive granite Kogan monument. It saved him from being sent to forced labor.","בזמן הסריקות בלוצ'ינץ הכבושה הסתתר מיכאל ברשטיין הצעיר בבית הקברות היהודי הישן, בקבר מתחת למצבת הגרניט הגדולה של משפחת קוגן. זה הציל אותו מגירוש לעבודות כפייה.")},
+ {t:L("Гетто, голод і тиф","Гетто, голод и тиф","Ghetto, hunger and typhus","גטו, רעב וטיפוס"),
+  x:L("Влітку 1941 року Фроїма Барштейна мобілізували, і він зник безвісти. Його дружина Мінця залишилася в гетто Лучинця з трьома синами. Родина пережила скупчення в колгоспній стайні, голод і важкий тиф матері.","Летом 1941 года Фроима Барштейна призвали в армию, и он пропал без вести. Его жена Минця осталась в лучинецком гетто с тремя сыновьями. Семья пережила скученность в колхозной конюшне, голод и тяжёлый тиф матери.","In the summer of 1941 Froim Barshtein was drafted and went missing. His wife Mintsya stayed in the Luchinets ghetto with their three sons. The family survived being herded into the kolkhoz stable, hunger and the mother's severe typhus.","בקיץ 1941 גויס פרוים ברשטיין ונעלם. אשתו מינציה נשארה בגטו לוצ'ינץ עם שלושת בניהם. המשפחה שרדה צפיפות באורווה של הקולחוז, רעב וטיפוס קשה של האם.")},
+ {t:L("Єдиний раз, коли мама підняла руку","Единственный раз, когда мама подняла руку","The only time Mother raised her hand","הפעם היחידה שאמא הרימה יד"),
+  x:L("За спогадами доньки, Клара Спектор була дуже лагідною людиною й лише одного разу вдарила дитину, коли мала затрималася й пізно повернулася додому. Тоді ходили тривожні чутки про викрадення дітей, і цей зрив був материнським страхом.","По воспоминаниям дочери, Клара Спектор была очень мягким человеком и лишь однажды ударила ребёнка, когда малышка задержалась и поздно вернулась домой. Тогда ходили тревожные слухи о похищении детей, и этот срыв был материнским страхом.","According to her daughter, Clara Spector was a very gentle person and struck her child only once, when the little girl came home late. Alarming rumors of child abductions were going around, and that moment came from a mother's fear.","לפי זיכרונות בתה, קלרה ספקטור הייתה אדם רך מאוד והכתה את ילדתה רק פעם אחת, כשהקטנה איחרה לחזור הביתה. אז נפוצו שמועות מדאיגות על חטיפת ילדים, והרגע הזה נבע מפחדה של אם.")}
 ];
 
 const EVENTS=[
- {year:1905,text:L("Початок: перші згадки про родину в [місто].","Начало: первые упоминания о семье в [город].","The beginning: first mentions of the family in [city].","ההתחלה: האזכורים הראשונים של המשפחה ב[עיר].")},
- {year:1941,text:L("Роки випробувань. Тут розкажіть про евакуацію, війну, втрати й порятунок.","Годы испытаний. Здесь расскажите об эвакуации, войне, потерях и спасении.","Years of trial. Tell here about evacuation, war, loss and survival.","שנות מבחן. כאן מספרים על פינוי, מלחמה, אובדן והצלה.")},
- {year:1970,text:L("Нове місце, нова глава. Переїзд, робота, діти.","Новое место, новая глава. Переезд, работа, дети.","A new place, a new chapter. Moving, work, children.","מקום חדש, פרק חדש. מעבר, עבודה, ילדים.")},
- {year:2000,text:L("Нове покоління. Сім'я розкидана по світу, але тримається разом.","Новое поколение. Семья разбросана по миру, но держится вместе.","A new generation. The family is scattered around the world, yet stays together.","דור חדש. המשפחה פזורה בעולם, אך נשארת יחד.")}
+ {y:"1930",x:L("Євсей Спектор очолює єврейський колгосп у Лучинці.","Евсей Спектор возглавляет еврейский колхоз в Лучинце.","Evsei Spector heads the Jewish kolkhoz in Luchinets.","אבסיי ספקטור עומד בראש הקולחוז היהודי בלוצ'ינץ.")},
+ {y:"~1939",x:L("Клара Спектор і Іван Боднар працюють учителями початкової школи в селі Громівка (запис про шлюб не збережено).","Клара Спектор и Иван Боднар работают учителями начальной школы в селе Громовка (запись о браке не сохранилась).","Clara Spector and Ivan Bodnar work as primary-school teachers in the village of Gromovka (the marriage record has not survived).","קלרה ספקטור ואיוון בודנר מלמדים בבית ספר יסודי בכפר גרומובקה (רישום הנישואין לא נשמר).")},
+ {y:"1940",x:L("3 квітня в Громівці народжується донька Клари та Івана.","3 апреля в Громовке рождается дочь Клары и Ивана.","On 3 April a daughter is born to Clara and Ivan in Gromovka.","ב-3 באפריל נולדה בגרומובקה בת לקלרה ולאיוון.")},
+ {y:"1941",x:L("Червень: Фроїма Барштейна призвано до армії, у серпні він зникає безвісти. Лучинець окуповано, родина в гетто.","Июнь: Фроима Барштейна призывают в армию, в августе он пропадает без вести. Лучинец оккупирован, семья в гетто.","June: Froim Barshtein is drafted; in August he goes missing. Luchinets is occupied and the family is in the ghetto.","יוני: פרוים ברשטיין מגויס לצבא, באוגוסט הוא נעלם. לוצ'ינץ כבושה והמשפחה בגטו.")},
+ {y:"1944",x:L("23 березня: Лучинець визволяють радянські війська.","23 марта: Лучинец освобождают советские войска.","23 March: Luchinets is liberated by Soviet troops.","23 במרץ: לוצ'ינץ משוחררת על ידי הצבא האדום.")},
+ {y:"1947",x:L("Повоєнний голод: помирає Євсей Спектор. Малка та п'ятеро їхніх дітей виживають.","Послевоенный голод: умирает Евсей Спектор. Малка и пятеро их детей выживают.","Postwar famine: Evsei Spector dies. Malka and their five children survive.","הרעב שאחרי המלחמה: אבסיי ספקטור מת. מלכה וחמשת ילדיהם שורדים.")},
+ {y:"1971",x:L("25 листопада у Володіївцях помирає Клара Спектор-Боднар.","25 ноября в Володиевцах умирает Клара Спектор-Боднар.","On 25 November Clara Spector-Bodnar dies in Volodiivtsi.","ב-25 בנובמבר קלרה ספקטור-בודנר מתה בוולודייבצי.")},
+ {y:"1995",x:L("Михайло Барштейн репатріюється до Ізраїлю (23 березня).","Михаил Барштейн репатриируется в Израиль (23 марта).","Mikhail Barshtein immigrates to Israel (23 March).","מיכאל ברשטיין עולה לישראל (23 במרץ).")},
+ {y:"1997–98",x:L("Володимир (1997) і Михайло (1998) дають інтерв'ю для архіву Фонду Шоа.","Владимир (1997) и Михаил (1998) дают интервью для архива Фонда Шоа.","Vladimir (1997) and Mikhail (1998) give interviews for the Shoah Foundation archive.","ולדימיר (1997) ומיכאל (1998) מעידים עבור ארכיון קרן שואה.")}
 ];
 
-// id — это часть ссылки YouTube после v= (например youtube.com/watch?v=ABC123 → "ABC123")
-const VIDEOS=[
- {id:"REPLACE_ME",title:L("Назва відео","Название видео","Video title","שם הסרטון"),desc:L("Короткий опис","Короткое описание","Short description","תיאור קצר")},
- {id:"REPLACE_ME",title:L("Назва відео","Название видео","Video title","שם הסרטון"),desc:L("Короткий опис","Короткое описание","Short description","תיאור קצר")}
+/* Видео-интервью. yt = часть ссылки YouTube после youtu.be/ или v=.
+   ВНИМАНИЕ: порядок ссылок угадан по порядку вашего сообщения (1-я = Михаил, 2-я = Владимир). ПРОВЕРЬТЕ и поменяйте местами, если нужно. */
+const INTERVIEWS=[
+ {pid:"m1",yt:"diMly7KauX4",vha:"USCINTERV_0043507",
+  meta:L("14 липня 1998 · Кір'ят-Ям, Ізраїль","14 июля 1998 · Кирьят-Ям, Израиль","14 July 1998 · Kiryat Yam, Israel","14 ביולי 1998 · קריית ים, ישראל"),
+  topics:L(["Довоєнний Лучинець, родина Спектор і єврейський колгосп","Окупація, гетто, тиф і схованки під час облав","Визволення 1944, повоєнні роки, робота ветлікарем, переїзд до Ізраїлю"].join("|"),["Довоенный Лучинец, семья Спектор и еврейский колхоз","Оккупация, гетто, тиф и укрытия во время облав","Освобождение 1944, послевоенные годы, работа ветврачом, переезд в Израиль"].join("|"),["Prewar Luchinets, the Spector family and the Jewish kolkhoz","Occupation, the ghetto, typhus and hiding during roundups","Liberation in 1944, the postwar years, work as a veterinarian, moving to Israel"].join("|"),["לוצ'ינץ שלפני המלחמה, משפחת ספקטור והקולחוז היהודי","כיבוש, גטו, טיפוס והסתתרות בזמן סריקות","השחרור ב-1944, שנות אחרי המלחמה, עבודה כווטרינר, העלייה לישראל"].join("|"))},
+ {pid:"v1",yt:"XfACgiQKQIw",vha:"USCINTERV_0035611",
+  meta:L("30 вересня 1997 · Флорешти, Молдова","30 сентября 1997 · Флорешты, Молдова","30 September 1997 · Floresti, Moldova","30 בספטמבר 1997 · פלורשט, מולדובה"),
+  topics:L(["Дитинство в Лучинці, дід Євсей, баба Малка й тітка Клара","Гетто очима дитини: стайня, комендатура, голод, мати з трьома синами","Визволення, служба у Львові, життя в Молдові"].join("|"),["Детство в Лучинце, дед Евсей, бабушка Малка и тётя Клара","Гетто глазами ребёнка: конюшня, комендатура, голод, мать с тремя сыновьями","Освобождение, служба во Львове, жизнь в Молдавии"].join("|"),["Childhood in Luchinets, grandfather Evsei, grandmother Malka and aunt Clara","The ghetto through a child's eyes: the stable, the commandant's office, hunger, a mother with three sons","Liberation, army service in Lviv, life in Moldova"].join("|"),["ילדות בלוצ'ינץ, הסב אבסיי, הסבתא מלכה והדודה קלרה","הגטו בעיני ילד: האורווה, הקומנדנטורה, רעב, אם עם שלושה בנים","השחרור, שירות צבאי בלבוב, חיים במולדובה"].join("|"))}
 ];
-const ARTICLES=[
- {url:"#",title:L("Назва статті","Название статьи","Article title","שם המאמר"),source:L("Джерело, рік","Источник, год","Source, year","מקור, שנה")},
- {url:"#",title:L("Назва статті","Название статьи","Article title","שם המאמר"),source:L("Джерело, рік","Источник, год","Source, year","מקור, שנה")}
+const jgUrl=c=>"https://www.jewishgen.org/search/usc-shoah-record.php?rec="+c;
+
+/* Варианты написания имён (помогают поиску в архивах) */
+const NAMES=[
+ {p:"e1",v:"Евсей / Овсей / Овший / Ишия"},
+ {p:"e2",v:"Малка / Молка · Калихман (Kalikhman)"},
+ {p:"kl",v:"Клара / Хайка · отчество: Евсеевна, Овсеевна, Євсіївна, Мойсеевна"},
+ {p:L("Боднар (прізвище)","Боднар (фамилия)","Bodnar (surname)","בודנר (שם משפחה)"),v:"Бондар → Боднар (исправлено в документах в 1956 г.)"},
+ {p:"mi",v:"Минця / Минция"},
+ {p:"fr",v:"Фроим / Фройка / Фройко / Фёдор / Волк"},
+ {p:"m1",v:"Михаил / Мейлых / Муня / Эммануил"},
+ {p:"v1",v:"Владимир / Велвл (Velvl)"},
+ {p:"o1",v:"Ойвид / Ойвет / Авдей"},
+ {p:"a1",v:"Айзик / Азик / Аркадий"},
+ {p:"f1",v:"Фрейда / Фрида / Freiga"}
+];
+
+const SOURCES=[
+ {x:L("Архів Фонду Шоа (VHA): інтерв'ю Михайла Барштейна, запис USCINTERV_0043507, код 45527","Архив Фонда Шоа (VHA): интервью Михаила Барштейна, запись USCINTERV_0043507, код 45527","Shoah Foundation archive (VHA): interview with Mikhail Barshtein, record USCINTERV_0043507, code 45527","ארכיון קרן שואה (VHA): ראיון עם מיכאל ברשטיין, רשומה USCINTERV_0043507, קוד 45527"),u:jgUrl("USCINTERV_0043507")},
+ {x:L("Архів Фонду Шоа (VHA): інтерв'ю Володимира Барштейна, запис USCINTERV_0035611, код 36832","Архив Фонда Шоа (VHA): интервью Владимира Барштейна, запись USCINTERV_0035611, код 36832","Shoah Foundation archive (VHA): interview with Vladimir Barshtein, record USCINTERV_0035611, code 36832","ארכיון קרן שואה (VHA): ראיון עם ולדימיר ברשטיין, רשומה USCINTERV_0035611, קוד 36832"),u:jgUrl("USCINTERV_0035611")},
+ {x:L("База даних Яд Вашем: записи про родину Спектор-Барштейн (№ 14778608, № 1219147)","База данных Яд Вашем: записи о семье Спектор-Барштейн (№ 14778608, № 1219147)","Yad Vashem database: records on the Spector-Barshtein family (nos. 14778608, 1219147)","מאגר יד ושם: רשומות על משפחת ספקטור-ברשטיין (מס' 14778608, 1219147)")},
+ {x:L("Державний архів Вінницької області: відповіді на запити 2026 року (запису про шлюб 1938–1939 років не знайдено)","Государственный архив Винницкой области: ответы на запросы 2026 года (записи о браке 1938–1939 годов не найдено)","State Archive of Vinnytsia Oblast: replies to 2026 requests (no 1938–1939 marriage record found)","הארכיון הממלכתי של מחוז וינניצה: תשובות לפניות 2026 (לא נמצא רישום נישואין 1938–1939)")},
+ {x:L("Фаїна Вінокурова, нариси з історії Голокосту в Копайгородському районі, портал «Євреї України»","Фаина Винокурова, очерки по истории Холокоста в Копайгородском районе, портал «Евреи Украины»","Faina Vinokurova, essays on the Holocaust history of the Kopaihorod district, the \"Jews of Ukraine\" portal","פאינה וינוקורובה, מסות על תולדות השואה במחוז קופיגורוד, פורטל «יהודי אוקראינה»")},
+ {x:L("Цивільні записи про народження й смерть та сімейні спогади","Записи актов гражданского состояния о рождении и смерти и семейные воспоминания","Civil birth and death records and family recollections","רישומי לידה ופטירה וזיכרונות משפחתיים")}
 ];
 
 /* ============================================================
@@ -302,12 +471,30 @@ function pick(){
 }
 const g=o=>o[lang]||o.en;
 const P=id=>PEOPLE.find(p=>p.id===id);
-const yrs=p=>p.living?T[lang].living:`${p.born}–${p.died??""}`;
+const yrs=p=>p.born?`${p.born}–${p.died??"?"}`:"";
 
-function setLang(l){
-  lang=l;try{localStorage.setItem("lang",l)}catch(e){}
-  history.replaceState(null,"","?lang="+l+location.hash);render();
+/* палитра: фиолетовый / оранжевый / синий, переливается или фиксируется */
+const PAL=[[139,92,246],[255,138,61],[59,130,246]];
+let mode="auto";
+try{const m=localStorage.getItem("pal");if(["auto","0","1","2"].includes(m))mode=m}catch(e){}
+const calm=matchMedia("(prefers-reduced-motion:reduce)").matches;
+function setVars(a,b,c){const r=document.documentElement.style;[["a",a],["b",b],["c",c]].forEach(([k,v])=>{const s=v.map(Math.round).join(",");r.setProperty("--"+k+"-rgb",s);r.setProperty("--"+k,"rgb("+s+")")})}
+const mix=(x,y,t)=>x.map((v,i)=>v+(y[i]-v)*t),ease=t=>t*t*(3-2*t);
+function applyPal(ts){
+  if(mode==="auto"&&!calm){
+    const STEP=12000,p=(ts%(STEP*3))/STEP,i=Math.floor(p)%3,q=p-Math.floor(p),f=ease(Math.min(1,Math.max(0,(q-.4)/.6)));
+    setVars(mix(PAL[i],PAL[(i+1)%3],f),mix(PAL[(i+1)%3],PAL[(i+2)%3],f),mix(PAL[(i+2)%3],PAL[i],f));
+  }else{const k=mode==="auto"?0:+mode;setVars(PAL[k],PAL[(k+1)%3],PAL[(k+2)%3])}
 }
+function setPal(m){mode=m;try{localStorage.setItem("pal",m)}catch(e){}applyPal(performance.now());drawTheme()}
+function drawTheme(){
+  const t=T[lang],defs=[["auto",t.th_auto,"conic-gradient(#8b5cf6,#ff8a3d,#3b82f6,#8b5cf6)"],["0",t.th_pur,"#8b5cf6"],["1",t.th_ora,"#ff8a3d"],["2",t.th_blu,"#3b82f6"]];
+  $("#th").innerHTML=defs.map(([k,n,bg])=>`<button data-pal="${k}" class="${k===mode?"on":""}" title="${esc(n)}" aria-label="${esc(n)}" style="background:${bg}"></button>`).join("");
+}
+applyPal(performance.now());
+if(!calm)setInterval(()=>{if(mode==="auto")applyPal(performance.now())},130);
+
+function setLang(l){lang=l;try{localStorage.setItem("lang",l)}catch(e){}history.replaceState(null,"","?lang="+l+location.hash);render()}
 
 function render(){
   const t=T[lang];RTL=lang==="he";
@@ -316,21 +503,36 @@ function render(){
   document.querySelectorAll("[data-i]").forEach(el=>el.textContent=t[el.dataset.i]);
   $("#logoName").textContent=g(FAMILY);$("#heroName").textContent=g(FAMILY);
   $("#langs").innerHTML=LANGS.map(l=>`<button class="${l===lang?"on":""}" data-l="${l}">${LBL[l]}</button>`).join("");
+  drawTheme();
   // stats
-  const gens=new Set(PEOPLE.map(p=>p.gen)).size,minY=Math.min(...PEOPLE.map(p=>p.born));
-  const st=[[gens,t.st_gen],[PEOPLE.length,t.st_ppl],[new Date().getFullYear()-minY,t.st_yrs],[VIDEOS.length+ARTICLES.length,t.st_sto]];
-  $("#stats").innerHTML=st.map(([n,l])=>`<div class="stat"><b>${n}</b><span>${esc(l)}</span></div>`).join("");
+  const gens=new Set(PEOPLE.map(p=>p.gen)).size,minY=Math.min(...PEOPLE.filter(p=>p.born).map(p=>parseInt(p.born)));
+  const st=[[gens,t.st_gen],[PEOPLE.length,t.st_ppl],[new Date().getFullYear()-minY,t.st_yrs],[STORIES.length+INTERVIEWS.length,t.st_sto]];
+  $("#stats").innerHTML=st.map(([n,l])=>`<div class="stat"><b class="grad">${n}</b><span>${esc(l)}</span></div>`).join("");
+  // stories
+  $("#sgrid").innerHTML=STORIES.map((s,i)=>`<article class="story glass rv"><i class="grad">0${i+1}</i><h3>${esc(g(s.t))}</h3><p>${esc(g(s.x))}</p></article>`).join("");
   // timeline
-  $("#tl").innerHTML=EVENTS.map(e=>`<div class="ev rv"><b>${e.year}</b><p>${esc(g(e.text))}</p></div>`).join("");
+  $("#tl").innerHTML=EVENTS.map(e=>`<div class="ev rv"><b class="grad">${esc(e.y)}</b><p>${esc(g(e.x))}</p></div>`).join("");
   buildTree();
   // people
   $("#pgrid").innerHTML=PEOPLE.map(p=>`<button class="card glass rv" data-id="${p.id}"><div class="av">${p.photo?`<img src="${esc(p.photo)}" alt="">`:esc(g(p.name)[0])}</div><h3>${esc(g(p.name))}</h3><span>${esc(yrs(p))}</span></button>`).join("");
-  // media
-  $("#vgrid").innerHTML=VIDEOS.map((v,i)=>{
-    const ok=v.id!=="REPLACE_ME";
-    return `<div class="vid rv" data-v="${i}" ${ok?`style="background-image:linear-gradient(#0000,#000a),url(https://i.ytimg.com/vi/${esc(v.id)}/hqdefault.jpg)"`:""}>
-      <div class="pl">▶</div><div class="cap"><b>${esc(g(v.title))}</b><small>${esc(ok?g(v.desc):t.video_hint)}</small></div></div>`}).join("");
-  $("#agrid").innerHTML=ARTICLES.map(a=>`<a class="art glass rv" href="${esc(a.url)}" target="_blank" rel="noopener"><div><b>${esc(g(a.title))}</b><br><small>${esc(g(a.source))}</small></div><span>↗</span></a>`).join("");
+  // interviews
+  $("#ivgrid").innerHTML=INTERVIEWS.map((v,i)=>{
+    const p=P(v.pid),ok=!!v.yt;
+    const bg=ok?`style="background-image:linear-gradient(#0000,#000a),url(https://i.ytimg.com/vi/${esc(v.yt)}/hqdefault.jpg)"`:"";
+    return `<article class="iv glass rv"><div class="vid" data-v="${i}" ${bg}><div class="pl">▶</div>${ok?"":`<div class="hint">${esc(t.iv_hint)}</div>`}</div>
+      <div class="ivb"><h3>${esc(g(p.name))}</h3><div class="meta">${esc(g(v.meta))}</div>
+      <ul>${g(v.topics).split("|").map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+      <div class="row">${ok?`<a class="btn ghost" href="https://youtu.be/${esc(v.yt)}" target="_blank" rel="noopener">${esc(t.iv_watch)} · YouTube ↗</a>`:""}<a class="btn ghost" href="${esc(jgUrl(v.vha))}" target="_blank" rel="noopener">${esc(t.iv_card)} ↗</a></div></div></article>`}).join("");
+  // archive
+  const num=n=>n.toLocaleString(lang);
+  $("#arbox").innerHTML=`<p>${esc(t.ar_t1)}</p>
+    <p class="facts">${esc(t.ar_facts.replace("{n}",num(60394)).replace("{l}","45").replace("{c}","69"))}</p>
+    <p class="src">${esc(t.ar_src)}</p>
+    <h3>${esc(t.ar_how_h)}</h3><ol>${t.ar_how.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>
+    <div class="row"><a class="btn" href="https://vha.usc.edu" target="_blank" rel="noopener">vha.usc.edu ↗</a><a class="btn" href="https://www.jewishgen.org/search/" target="_blank" rel="noopener">JewishGen ↗</a></div>`;
+  // names + sources
+  $("#ntb").innerHTML=NAMES.map(n=>`<tr><td>${esc(typeof n.p==="string"?g(P(n.p).name):g(n.p))}</td><td>${esc(n.v)}</td></tr>`).join("");
+  $("#srcl").innerHTML=SOURCES.map(s=>`<li class="glass rv">${s.u?`<a href="${esc(s.u)}" target="_blank" rel="noopener">${esc(g(s.x))}</a>`:esc(g(s.x))}</li>`).join("");
   $("#mail").href="mailto:"+CONFIG.email;
   observe();
 }
@@ -338,44 +540,42 @@ function render(){
 function buildTree(){
   const gens=[...new Set(PEOPLE.map(p=>p.gen))].sort((a,b)=>a-b);
   const rows=gens.map(n=>PEOPLE.filter(p=>p.gen===n));
-  const maxN=Math.max(...rows.map(r=>r.length)),W=Math.max(760,maxN*220),RH=170,H=rows.length*RH+30,pos={};
+  const maxN=Math.max(...rows.map(r=>r.length)),W=Math.max(760,maxN*160),RH=170,H=rows.length*RH+30,pos={};
   rows.forEach((r,ri)=>r.forEach((p,i)=>{let x=(i+1)*W/(r.length+1);if(RTL)x=W-x;pos[p.id]={x,y:50+ri*RH}}));
-  let s=`<svg viewBox="0 0 ${W} ${H}" role="img"><defs><linearGradient id="eg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb35c"/><stop offset="1" stop-color="#7fd4ff"/></linearGradient></defs>`;
-  PEOPLE.forEach(c=>c.parents.forEach(pid=>{
-    const a=pos[pid],b=pos[c.id],m=(a.y+b.y)/2;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img"><defs><linearGradient id="eg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--a)"/><stop offset="1" style="stop-color:var(--c)"/></linearGradient></defs>`;
+  PEOPLE.forEach(c=>c.parents.forEach(pid=>{const a=pos[pid],b=pos[c.id];if(!a||!b)return;const m=(a.y+b.y)/2;
     s+=`<path class="edge" d="M${a.x} ${a.y} C${a.x} ${m},${b.x} ${m},${b.x} ${b.y}"/>`}));
   PEOPLE.forEach(p=>{if(p.spouse&&p.id<p.spouse){const a=pos[p.id],b=pos[p.spouse];if(a&&b)s+=`<line class="sp" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}"/>`}});
-  PEOPLE.forEach((p,i)=>{const q=pos[p.id];
+  PEOPLE.forEach((p,i)=>{const q=pos[p.id],first=g(p.name).split(" ")[0];
     s+=`<g class="node" data-id="${p.id}" tabindex="0" role="button" aria-label="${esc(g(p.name))}" transform="translate(${q.x},${q.y})">
       <circle class="halo2" r="22" style="animation-delay:${(i*.7)%4}s"/><circle class="dot" r="6"/>
-      <text class="nm" y="42" text-anchor="middle">${esc(g(p.name))}</text><text class="yr" y="60" text-anchor="middle">${esc(yrs(p))}</text></g>`});
+      <text class="nm" y="42" text-anchor="middle">${esc(first)}</text><text class="yr" y="60" text-anchor="middle">${esc(yrs(p))}</text></g>`});
   $("#treebox").innerHTML=s+"</svg>";
 }
 
 function openP(id){
-  const p=P(id),t=T[lang];
-  const kids=PEOPLE.filter(c=>c.parents.includes(id));
+  const p=P(id),t=T[lang],kids=PEOPLE.filter(c=>c.parents.includes(id));
   const chips=ids=>`<div class="chips">${ids.map(i=>`<button class="chip" data-id="${i}">${esc(g(P(i).name))}</button>`).join("")}</div>`;
   const row=(k,v)=>v?`<div class="mrow"><small>${esc(t[k])}</small>${v}</div>`:"";
   $("#mbox").innerHTML=`<button class="mx" data-close aria-label="${esc(t.close)}">✕</button>
     <div class="av" style="width:76px;height:76px;font-size:30px">${p.photo?`<img src="${esc(p.photo)}" alt="">`:esc(g(p.name)[0])}</div>
     <h3>${esc(g(p.name))}</h3><div style="color:var(--mut)">${esc(yrs(p))}</div>
-    ${p.living?"":row("place",p.place?esc(g(p.place)):"")}
+    ${row("place",p.place?esc(g(p.place)):"")}
     <div class="mrow">${esc(g(p.bio))}</div>
-    ${row("parents",p.parents.length?chips(p.parents):"")}
-    ${row("spouse",p.spouse?chips([p.spouse]):"")}
+    ${row("parents",p.parents.filter(P).length?chips(p.parents.filter(P)):"")}
+    ${row("spouse",p.spouse&&P(p.spouse)?chips([p.spouse]):"")}
     ${row("children",kids.length?chips(kids.map(k=>k.id)):"")}`;
   $("#modal").classList.add("open");
 }
 const closeM=()=>$("#modal").classList.remove("open");
 
-/* события */
 document.addEventListener("click",e=>{
   const l=e.target.closest("[data-l]");if(l)return setLang(l.dataset.l);
+  const pl=e.target.closest("[data-pal]");if(pl)return setPal(pl.dataset.pal);
   if(e.target.closest("[data-close]")||e.target===$("#modal"))return closeM();
   const n=e.target.closest("[data-id]");if(n)return openP(n.dataset.id);
   const v=e.target.closest("[data-v]");
-  if(v&&!v.querySelector("iframe")){const id=VIDEOS[v.dataset.v].id;if(id!=="REPLACE_ME"){v.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1" allow="autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>`}}
+  if(v&&!v.querySelector("iframe")){const id=INTERVIEWS[v.dataset.v].yt;if(id){v.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1" allow="autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>`}}
   if(e.target.closest("#nav a"))$("#nav").classList.remove("open");
 });
 document.addEventListener("keydown",e=>{
@@ -384,7 +584,6 @@ document.addEventListener("keydown",e=>{
 });
 $("#burger").onclick=()=>$("#nav").classList.toggle("open");
 
-/* появление при прокрутке */
 let io;
 function observe(){
   io&&io.disconnect();
@@ -394,11 +593,11 @@ function observe(){
 
 /* звёздное небо */
 (function(){
-  const c=$("#stars"),x=c.getContext("2d"),dpr=Math.min(devicePixelRatio||1,2),calm=matchMedia("(prefers-reduced-motion:reduce)").matches;
+  const c=$("#stars"),x=c.getContext("2d"),dpr=Math.min(devicePixelRatio||1,2);
   let w,h,S=[];
   function rs(){
     w=c.width=innerWidth*dpr;h=c.height=innerHeight*dpr;c.style.width=innerWidth+"px";c.style.height=innerHeight+"px";
-    S=Array.from({length:Math.round(innerWidth*innerHeight/5500)},()=>({x:Math.random()*w,y:Math.random()*h,z:Math.random()*.9+.1,p:Math.random()*6.28,c:Math.random()<.18?"#ffd9a8":Math.random()<.3?"#bfe6ff":"#fff"}));
+    S=Array.from({length:Math.round(innerWidth*innerHeight/5500)},()=>({x:Math.random()*w,y:Math.random()*h,z:Math.random()*.9+.1,p:Math.random()*6.28,c:Math.random()<.2?"#ffd2a8":Math.random()<.35?"#c9b8ff":"#fff"}));
   }
   function draw(t){
     x.clearRect(0,0,w,h);const sy=scrollY*dpr;
